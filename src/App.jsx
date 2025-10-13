@@ -1,42 +1,145 @@
-import React from "react";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import About from "./components/About";
-import Menu from "./components/Menu";
-import Footer from "./components/Footer";
+// src/App.jsx
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AuthRoute from "./components/AuthRoute";
+import { Toaster } from "react-hot-toast";
+
+// Layouts
+import PublicLayout from "./layouts/PublicLayout";
+import AdminLayout from "./layouts/AdminLayout";
+
+// Public pages
+import Home from "./pages/frontend/Home";
+import AboutUs from "./pages/frontend/AboutUs";
+import Blogs from "./pages/frontend/Blogs";
+import CartPage from "./pages/frontend/CartPage";
+import CheckoutPage from "./pages/frontend/CheckoutPage";
+import ThankYouPage from "./pages/frontend/ThankYouPage";
+import Menu from "./pages/frontend/Menu";
 import Dishes from "./components/Dishes";
-import Reviews from "./components/Review";
 import Review from "./components/Review";
+
+// Admin pages
+import Dashboard from "./pages/dashboard/Dashboard";
+import AdminDishes from "./pages/dashboard/AdminDishes";
+import Orders from "./pages/dashboard/Orders";
+import Customers from "./pages/dashboard/Customers";
+import MyProfilePage from "./pages/dashboard/MyProfilePage";
+import BlogCategories from "./pages/dashboard/BlogCategories";
+import AddBlog from "./pages/dashboard/AddBlog";
+import PostsList from "./pages/dashboard/PostsList";
+import EditBlog from "./pages/dashboard/EditBlog";
+
+// Auth pages
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import TrackOrderPage from "./pages/frontend/TrackOrderPage";
+import SingleBlog from "./pages/frontend/SingleBlog";
+import NextBuses from "./pages/frontend/NextBuses";
+
+// Hook to sync logout across tabs
+function StorageSync() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === "token" && !e.newValue) {
+        navigate("/login", { replace: true });
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [navigate]);
+
+  return null;
+}
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
+    <Router>
+      <StorageSync />
 
-      <main>
-        <div id="home">
-          <Home />
-        </div>
+      <Routes>
+        {/* Public site */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/:slug" element={<SingleBlog />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/dishes" element={<Dishes />} />
+          <Route path="/reviews" element={<Review />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/trackorder" element={<TrackOrderPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/thankyou" element={<ThankYouPage />} />
+          <Route path="/next-buses" element={<NextBuses />} /> {/* 👈 New Route */}
 
-        <div id="dishes">
-          <Dishes />
-        </div>
+        </Route>
 
-        <div id="about">
-          <About />
-        </div>
+        {/* Auth pages */}
+        <Route
+          path="/login"
+          element={
+            <AuthRoute>
+              <Login />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <AuthRoute>
+              <Register />
+            </AuthRoute>
+          }
+        />
 
-        <div id="menu">
-          <Menu />
-        </div>
+        {/* Admin protected routes */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="customers" element={<Customers />} />
 
-        <div id="review">
-          <Review />
-        </div>
-      </main>
+          {/* Dishes */}
+          <Route path="dishes" element={<AdminDishes />} />
 
-      <Footer />
-    </div>
+          {/* Blog */}
+          <Route path="blog-categories" element={<BlogCategories />} />
+          <Route path="blogs" element={<PostsList />} />
+          <Route path="blog/add" element={<AddBlog />} />
+          <Route path="edit-blog/:id" element={<EditBlog />} /> {/* ✅ fixed path */}
+        </Route>
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute roles={["user", "admin"]}>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+
+          {/* Dashboard / Profile */}
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="profile" element={<MyProfilePage />} />
+
+          {/* Orders / Customers */}
+          <Route path="orders" element={<Orders />} />
+        </Route>
+
+      </Routes>
+
+
+      <Toaster position="bottom-right" reverseOrder={false} />
+    </Router>
   );
 };
 
