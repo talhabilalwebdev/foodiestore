@@ -20,7 +20,7 @@ export default function AddPost() {
   // ✅ Fetch categories dynamically
   useEffect(() => {
     axios
-      .get("https://foodiebackend-ru76.onrender.com/api/categories")
+      .get("https://foodiebackend-1-ef18.onrender.com/api/categories")
       .then((res) => setCategories(res.data))
       .catch(() => toast.error("Failed to load categories"));
   }, []);
@@ -48,7 +48,7 @@ export default function AddPost() {
 
     try {
       setLoading(true);
-      const res = await axios.post("https://foodiebackend-ru76.onrender.com/api/blog-posts", form, {
+      const res = await axios.post("https://foodiebackend-1-ef18.onrender.com/api/blog-posts", form, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
