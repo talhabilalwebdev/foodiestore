@@ -44,7 +44,7 @@ export default function Register() {
 
   try {
     // 1️⃣ Register user
-    const res = await fetch("https://foodiebackend-ru76.onrender.com/api/register", {
+    const res = await fetch("https://foodiebackend-1-ef18.onrender.com/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, address, phone, password }),
@@ -58,7 +58,7 @@ export default function Register() {
     }
 
     // 2️⃣ Auto-login after registration
-    const loginRes = await fetch("https://foodiebackend-ru76.onrender.com/api/login", {
+    const loginRes = await fetch("https://foodiebackend-1-ef18.onrender.com/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
