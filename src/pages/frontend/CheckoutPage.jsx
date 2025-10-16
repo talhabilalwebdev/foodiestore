@@ -39,7 +39,7 @@ export default function CheckoutPage() {
 
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/user/${user.id}`, {
+        const res = await fetch(`https://foodiebackend-ru76.onrender.com/api/user/${user.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -84,7 +84,7 @@ export default function CheckoutPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/checkout", {
+      const response = await fetch("https://foodiebackend-ru76.onrender.com/api/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
