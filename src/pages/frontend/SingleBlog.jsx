@@ -17,7 +17,7 @@ export default function SingleBlog() {
         try {
             console.log("Fetching blog with slug:", slug);
             // This endpoint uses the slug, which is correct based on the API definition
-            const res = await axios.get(`https://foodiebackend-ru76.onrender.com/api/singleblogpost/${slug}`);
+            const res = await axios.get(`https://foodiebackend-1-ef18.onrender.com/api/singleblogpost/${slug}`);
             setBlog(res.data);
         } catch (err) {
             console.error(err);
