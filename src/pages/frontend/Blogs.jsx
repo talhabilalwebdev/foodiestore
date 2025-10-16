@@ -14,7 +14,7 @@ export default function Blogs() {
   const fetchBlogs = async (page) => {
     setLoading(true); // Set loading to true at the start of fetch
     try {
-      const res = await axios.get(`http://localhost:5000/api/blogpost?page=${page}&limit=${limit}`);
+      const res = await axios.get(`https://foodiebackend-ru76.onrender.com/api/blogpost?page=${page}&limit=${limit}`);
       // console.log("API Response Data:", res.posts);
 
       // The API returns an object {posts: [...], totalPages: ...}
