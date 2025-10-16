@@ -16,7 +16,7 @@ const Customers = () => {
   const fetchCustomers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("https://foodiebackend-ru76.onrender.com/api/customers");
+      const response = await axios.get("https://foodiebackend-1-ef18.onrender.com/api/customers");
       setCustomers(response.data);
     } catch (error) {
       toast.error("Failed to fetch customers");
@@ -40,7 +40,7 @@ const Customers = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this customer?")) return;
     try {
-      await axios.delete(`https://foodiebackend-ru76.onrender.com/api/customers/${id}`);
+      await axios.delete(`https://foodiebackend-1-ef18.onrender.com/api/customers/${id}`);
       setCustomers((prev) => prev.filter((c) => c._id !== id));
       toast.success("Customer deleted successfully");
     } catch (error) {
@@ -58,7 +58,7 @@ const Customers = () => {
   const handleSaveEdit = async () => {
     try {
       const { _id, name, email, address, status } = editCustomer;
-      await axios.put(`https://foodiebackend-ru76.onrender.com/api/customers/${_id}`, {
+      await axios.put(`https://foodiebackend-1-ef18.onrender.com/api/customers/${_id}`, {
         name,
         email,
         address,
