@@ -55,7 +55,7 @@ export default function AdminDishes() {
     try {
       setLoading(true);
       if (editingDishId) {
-        await axios.put(`https://foodiebackend-ru76.onrender.com/api/dishes/${editingDishId}`, formData, {
+        await axios.put(`https://foodiebackend-1-ef18.onrender.com/api/dishes/${editingDishId}`, formData, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Dish updated successfully!");
@@ -65,7 +65,7 @@ export default function AdminDishes() {
           setLoading(false);
           return;
         }
-        await axios.post("https://foodiebackend-ru76.onrender.com/api/dishes", formData, {
+        await axios.post("https://foodiebackend-1-ef18.onrender.com/api/dishes", formData, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Dish added successfully!");
@@ -94,7 +94,7 @@ export default function AdminDishes() {
   const deleteDish = async (dishId) => {
     if (!window.confirm("Are you sure you want to delete this dish?")) return;
     try {
-      await axios.delete(`https://foodiebackend-ru76.onrender.com/api/dishes/${dishId}`, {
+      await axios.delete(`https://foodiebackend-1-ef18.onrender.com/api/dishes/${dishId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Dish deleted successfully!");
