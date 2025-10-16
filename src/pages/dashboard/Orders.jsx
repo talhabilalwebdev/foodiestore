@@ -27,7 +27,7 @@ const OrdersAdmin = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/orders");
+      const res = await axios.get("https://foodiebackend-ru76.onrender.com/api/orders");
       let allOrders = res.data;
 
       // ✅ If user is not admin → only show their orders
@@ -68,7 +68,7 @@ const OrdersAdmin = () => {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/orders/update/${id}`, {
+      await axios.put(`https://foodiebackend-ru76.onrender.com/api/orders/update/${id}`, {
         status: newStatus,
       });
       setOrders((prev) =>
@@ -86,7 +86,7 @@ const OrdersAdmin = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/orders/delete/${id}`);
+      await axios.delete(`https://foodiebackend-ru76.onrender.com/api/orders/delete/${id}`);
       setOrders((prev) => prev.filter((order) => order._id !== id));
       toast.success("Order deleted successfully");
     } catch (error) {
