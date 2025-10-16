@@ -10,7 +10,7 @@ export default function PostsList() {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get("https://foodiebackend-ru76.onrender.com/api/blogposts");
+      const res = await axios.get("https://foodiebackend-1-ef18.onrender.com/api/blogposts");
       setPosts(res.data);
     } catch (err) {
       console.error(err);
@@ -27,7 +27,7 @@ export default function PostsList() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     try {
-      await axios.delete(`https://foodiebackend-ru76.onrender.com/api/blogposts/${id}`);
+      await axios.delete(`https://foodiebackend-1-ef18.onrender.com/api/blogposts/${id}`);
       toast.success("Post deleted successfully");
       setPosts(posts.filter((p) => p._id !== id));
     } catch (err) {
