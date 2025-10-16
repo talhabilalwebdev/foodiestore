@@ -22,7 +22,7 @@ export default function Login() {
     }
 
     try {
-      const res = await fetch("https://foodiebackend-ru76.onrender.com/api/login", {
+      const res = await fetch("https://foodiebackend-1-ef18.onrender.com/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
