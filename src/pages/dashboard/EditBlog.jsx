@@ -25,7 +25,7 @@ export default function EditBlog() {
   // ✅ Fetch categories
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/categories")
+      .get("https://foodiebackend-ru76.onrender.com/api/categories")
       .then((res) => setCategories(res.data))
       .catch(() => toast.error("Failed to load categories"));
   }, []);
@@ -34,7 +34,7 @@ export default function EditBlog() {
   useEffect(() => {
     if (!id) return;
     axios
-      .get(`http://localhost:5000/api/blogposts/${id}`)
+      .get(`https://foodiebackend-ru76.onrender.com/api/blogposts/${id}`)
       .then((res) => {
         const blog = res.data;
         setFormData({
@@ -86,7 +86,7 @@ export default function EditBlog() {
 
     try {
       setLoading(true);
-      await axios.put(`http://localhost:5000/api/blogposts/${id}`, form, {
+      await axios.put(`https://foodiebackend-ru76.onrender.com/api/blogposts/${id}`, form, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
