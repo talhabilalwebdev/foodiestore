@@ -17,7 +17,7 @@ export default function Home() {
     // Fetch dishes from Flask API
     useEffect(() => {
         axios
-            .get("http://localhost:5000/api/fdishes")
+            .get("https://foodiebackend-ru76.onrender.com/api/fdishes")
             .then((res) => {
                 setDishes(res.data.dishes); // access dishes array
                 setToday(res.data.today);   // access today name
