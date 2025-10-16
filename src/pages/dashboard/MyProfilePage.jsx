@@ -17,7 +17,7 @@ export default function MyProfilePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`https://foodiebackend-ru76.onrender.com/api/user/${user.id}`, {
+        const res = await fetch(`https://foodiebackend-1-ef18.onrender.com/api/user/${user.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -57,7 +57,7 @@ export default function MyProfilePage() {
     setLoading(true);
 
     try {
-      const res = await fetch(`https://foodiebackend-ru76.onrender.com/api/user/${user.id}`, {
+      const res = await fetch(`https://foodiebackend-1-ef18.onrender.com/api/user/${user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
