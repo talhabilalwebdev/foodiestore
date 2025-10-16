@@ -18,7 +18,7 @@ export default function TrackOrderPage() {
     setOrder(null);
 
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${orderId}`);
+      const res = await fetch(`https://foodiebackend-ru76.onrender.com/api/orders/${orderId}`);
       const data = await res.json();
 
       if (res.ok) {
