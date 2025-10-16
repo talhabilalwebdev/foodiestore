@@ -13,7 +13,7 @@ export default function BlogCategories() {
   // Fetch categories
   const fetchCategories = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/categories");
+      const res = await fetch("https://foodiebackend-ru76.onrender.com/api/categories");
       const data = await res.json();
       setCategories(data);
     } catch (err) {
@@ -34,8 +34,8 @@ export default function BlogCategories() {
     try {
       const method = editingId ? "PUT" : "POST";
       const url = editingId
-        ? `http://127.0.0.1:5000/api/categories/${editingId}`
-        : "http://127.0.0.1:5000/api/categories";
+        ? `https://foodiebackend-ru76.onrender.com/api/categories/${editingId}`
+        : "https://foodiebackend-ru76.onrender.com/api/categories";
 
       const res = await authFetch(url, {
         method,
@@ -63,7 +63,7 @@ export default function BlogCategories() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this category?")) return;
     try {
-      await authFetch(`http://127.0.0.1:5000/api/categories/${id}`, {
+      await authFetch(`https://foodiebackend-ru76.onrender.com/api/categories/${id}`, {
         method: "DELETE",
       });
       toast.success("Category deleted");
