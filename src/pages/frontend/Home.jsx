@@ -22,6 +22,8 @@ export default function Home() {
                 setDishes(res.data.dishes); // access dishes array
                 setToday(res.data.today);   // access today name
                 setLoading(false);
+                
+                console.log(res.data);
             })
             .catch((err) => {
                 console.error("Error fetching dishes:", err);
