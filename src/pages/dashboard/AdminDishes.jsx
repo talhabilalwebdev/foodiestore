@@ -12,7 +12,7 @@ export default function AdminDishes() {
   // Fetch all dishes
   const fetchDishes = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:5000/api/dishes");
+      const res = await axios.get("https://foodiebackend-ru76.onrender.com/api/dishes");
       setDishes(res.data);
     } catch (err) {
       console.error(err);
@@ -55,7 +55,7 @@ export default function AdminDishes() {
     try {
       setLoading(true);
       if (editingDishId) {
-        await axios.put(`http://127.0.0.1:5000/api/dishes/${editingDishId}`, formData, {
+        await axios.put(`https://foodiebackend-ru76.onrender.com/api/dishes/${editingDishId}`, formData, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Dish updated successfully!");
@@ -65,7 +65,7 @@ export default function AdminDishes() {
           setLoading(false);
           return;
         }
-        await axios.post("http://127.0.0.1:5000/api/dishes", formData, {
+        await axios.post("https://foodiebackend-ru76.onrender.com/api/dishes", formData, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Dish added successfully!");
@@ -94,7 +94,7 @@ export default function AdminDishes() {
   const deleteDish = async (dishId) => {
     if (!window.confirm("Are you sure you want to delete this dish?")) return;
     try {
-      await axios.delete(`http://127.0.0.1:5000/api/dishes/${dishId}`, {
+      await axios.delete(`https://foodiebackend-ru76.onrender.com/api/dishes/${dishId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Dish deleted successfully!");
