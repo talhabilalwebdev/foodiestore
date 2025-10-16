@@ -18,7 +18,7 @@ export default function Cart() {
                             >
                                 <div className="flex items-center gap-4">
                                     <img
-                                        src={`http://localhost:5000${item.img}`}
+                                        src={`https://foodiebackend-1-ef18.onrender.com${item.img}`}
                                         alt={item.title}
                                         className="w-20 h-20 object-cover rounded-lg"
                                     />
