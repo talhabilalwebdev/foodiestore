@@ -12,7 +12,7 @@ export default function AdminDishes() {
   // Fetch all dishes
   const fetchDishes = async () => {
     try {
-      const res = await axios.get("https://foodiebackend-ru76.onrender.com/api/dishes");
+      const res = await axios.get("https://foodiebackend-1-ef18.onrender.com//api/dishes");
       setDishes(res.data);
     } catch (err) {
       console.error(err);
