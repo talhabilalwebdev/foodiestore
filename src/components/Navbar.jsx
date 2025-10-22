@@ -82,8 +82,11 @@ const Navbar = () => {
         <Link to="/" onClick={closeMenu} className="hover:text-brightColor transition-all">Home</Link>
         <Link to="/about-us" onClick={closeMenu} className="hover:text-brightColor transition-all">About</Link>
         <Link to="/blogs" onClick={closeMenu} className="hover:text-brightColor transition-all">Blogs</Link>
-        <Link to="/menu" onClick={closeMenu} className="hover:text-brightColor transition-all">Menu</Link>
-        <Link to="/reviews" onClick={closeMenu} className="hover:text-brightColor transition-all">Reviews</Link>
+        {isHome ? (
+            <a href="#menu" className="hover:text-brightColor transition-all">Menu</a>
+          ) : (
+            <Link to="/#menu" className="hover:text-brightColor transition-all">Menu</Link>
+          )}
 
         {/* Role-based buttons */}
         {isLoggedIn ? (
