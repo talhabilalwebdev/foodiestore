@@ -28,7 +28,7 @@ export default function Dashboard() {
     // ✅ Fetch dashboard statistics
     const fetchStats = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/dashboard-stats");
+        const res = await fetch("https://foodiebackend-1-ef18.onrender.com/api/dashboard-stats");
         const data = await res.json();
         console.log("Dashboard API Response:", data); // ✅ log API response
         setStats(data);
