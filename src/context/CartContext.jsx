@@ -11,7 +11,7 @@ export function CartProvider({ children }) {
 
   // ✅ Automatically clean up non-today dishes when loading
   useEffect(() => {
-    const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+    const today = new Date().toLocaleDateString("ar-SA", { weekday: "long" });
     const filtered = cart.filter(
       (item) => item.day?.toLowerCase() === today.toLowerCase()
     );
