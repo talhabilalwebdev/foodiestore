@@ -8,6 +8,8 @@ import { Toaster } from "react-hot-toast";
 // Layouts
 import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./layouts/AdminLayout";
+import NotFound from "./pages/NotFound";
+
 
 // Public pages
 import Home from "./pages/frontend/Home";
