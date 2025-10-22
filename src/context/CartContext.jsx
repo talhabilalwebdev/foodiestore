@@ -30,7 +30,7 @@ export function CartProvider({ children }) {
 
   // ✅ Add only today's dishes
   const addToCart = (dish) => {
-    const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+    const today = new Date().toLocaleDateString("en-SA", { weekday: "long" });
 
     if (dish.day?.toLowerCase() !== today.toLowerCase()) {
       toast.error(`You can only order today's dishes! ${today}`);
@@ -92,7 +92,7 @@ export function CartProvider({ children }) {
       return;
     }
 
-    const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+    const today = new Date().toLocaleDateString("en-SA", { weekday: "long" });
     const invalid = cart.filter(
       (item) => item.day?.toLowerCase() !== today.toLowerCase()
     );
