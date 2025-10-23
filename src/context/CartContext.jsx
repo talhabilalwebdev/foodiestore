@@ -37,7 +37,7 @@ export function CartProvider({ children }) {
 
   // ✅ Add only today's dishes
   const addToCart = (dish) => {
-    const today = new Date().toLocaleDateString("ar-SA", { weekday: "long" });
+    const today = new Date().toLocaleDateString("en-SA", { weekday: "long" });
 
     if (dish.day?.toLowerCase() !== today.toLowerCase()) {
       toast.error(`You can only order today's dishes! ${today}`);
