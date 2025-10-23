@@ -9,19 +9,26 @@ export function CartProvider({ children }) {
     return saved ? JSON.parse(saved) : [];
   });
 
-  // ✅ Automatically clean up non-today dishes when loading
+  const [loading, setLoading] = useState(false); // ✅ Loading for checkout
+
+  // ✅ Clean up expired dishes silently on mount
   useEffect(() => {
     const today = new Date().toLocaleDateString("ar-SA", { weekday: "long" });
-    const filtered = cart.filter(
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const filtered = savedCart.filter(
       (item) => item.day?.toLowerCase() === today.toLowerCase()
     );
 
-    if (filtered.length !== cart.length) {
-      toast("Removed expired dishes from cart 🧹", { icon: "⚠️" });
+    // Only overwrite cart if some items are expired
+    if (filtered.length !== savedCart.length) {
       setCart(filtered);
       localStorage.setItem("cart", JSON.stringify(filtered));
+      // ❌ No toast here to avoid confusing the user
+    } else {
+      setCart(savedCart);
     }
-  }, []); // Run once on mount
+  }, []);
 
   // ✅ Save to localStorage whenever cart updates
   useEffect(() => {
@@ -30,24 +37,21 @@ export function CartProvider({ children }) {
 
   // ✅ Add only today's dishes
   const addToCart = (dish) => {
-    const today = new Date().toLocaleDateString("en-SA", { weekday: "long" });
+    const today = new Date().toLocaleDateString("ar-SA", { weekday: "long" });
 
     if (dish.day?.toLowerCase() !== today.toLowerCase()) {
-      toast.error(`You can only order today's dishes! ${today}`);
+      toast.error(`You can only order today's dishes!`);
       return;
     }
 
     setCart((prev) => {
-      // Remove any old duplicate entry (prevents old quantity from lingering)
       const filtered = prev.filter((item) => item._id !== dish._id);
-
-      // Add as new item with quantity = 1
       toast.success("Added to cart!");
       return [...filtered, { ...dish, quantity: 1 }];
     });
   };
 
-  // ✅ Remove item (and instantly sync localStorage)
+  // ✅ Remove item
   const removeFromCart = (id) => {
     setCart((prev) => {
       const updated = prev.filter((item) => item._id !== id);
@@ -75,8 +79,8 @@ export function CartProvider({ children }) {
     toast.success("Cart cleared!");
   };
 
-  // ✅ Checkout
-  const checkout = () => {
+  // ✅ Checkout with loading
+  const checkout = async () => {
     const token =
       localStorage.getItem("token") ||
       localStorage.getItem("authToken") ||
@@ -92,7 +96,7 @@ export function CartProvider({ children }) {
       return;
     }
 
-    const today = new Date().toLocaleDateString("en-SA", { weekday: "long" });
+    const today = new Date().toLocaleDateString("ar-SA", { weekday: "long" });
     const invalid = cart.filter(
       (item) => item.day?.toLowerCase() !== today.toLowerCase()
     );
@@ -102,8 +106,17 @@ export function CartProvider({ children }) {
       return;
     }
 
-    toast.success("Proceeding to checkout...");
-    // Example: navigate("/checkout") or send order to backend
+    setLoading(true);
+    try {
+      // Simulate API call or navigate to checkout
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      toast.success("Proceeding to checkout...");
+    } catch (err) {
+      toast.error("Checkout failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // ✅ Total price
@@ -122,6 +135,7 @@ export function CartProvider({ children }) {
         clearCart,
         checkout,
         total,
+        loading, // ✅ expose loading
       }}
     >
       {children}
