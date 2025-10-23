@@ -111,6 +111,10 @@ export default function EditBlog() {
     } else {
       toast.error("Only PNG, JPG, JPEG, WEBP files allowed!");
     }
+    if (file.size > 2 * 1024 * 1024) { // 2 MB
+        toast.error("File is too large! Maximum 2 MB allowed.");
+        return;
+      }
   };
 
   if (!isLoaded) {
