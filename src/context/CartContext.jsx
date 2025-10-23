@@ -40,7 +40,7 @@ export function CartProvider({ children }) {
     const today = new Date().toLocaleDateString("ar-SA", { weekday: "long" });
 
     if (dish.day?.toLowerCase() !== today.toLowerCase()) {
-      toast.error(`You can only order today's dishes!`);
+      toast.error(`You can only order today's dishes! ${today}`);
       return;
     }
 
