@@ -43,7 +43,7 @@ export default function CartPage() {
           <div className="text-center py-10">
             <h2 className="text-2xl text-gray-600">Your cart is empty</h2>
             <Link
-              to="/menu"
+              to="/"
               className="inline-block mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
             >
               Browse Menu
