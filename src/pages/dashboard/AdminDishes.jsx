@@ -33,6 +33,10 @@ export default function AdminDishes() {
         toast.error("Only PNG, JPG, JPEG, WEBP files allowed!");
         return;
       }
+      if (file.size > 2 * 1024 * 1024) { // 2 MB
+        toast.error("File is too large! Maximum 2 MB allowed.");
+        return;
+      }
       setNewDish({ ...newDish, img: file });
     }
   };
